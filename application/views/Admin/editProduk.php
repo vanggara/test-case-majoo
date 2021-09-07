@@ -81,7 +81,7 @@
 										<div class="form-group">
 											<label class="small mb-1" for="hargaProduk">Harga Produk </label>
 											<input class="form-control py-4" name="hargaProduk" id="hargaProduk"
-												type="text" value='<?php echo "Rp ". number_format($product['HARGA_PRODUK'],2,',','.') ?>'
+												type="text" value='<?php echo $product['HARGA_PRODUK'] ?>'
 												placeholder="" required />
 										</div>
 									</div>
