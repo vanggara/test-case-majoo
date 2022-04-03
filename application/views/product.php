@@ -22,8 +22,13 @@
 <body id="page-top">
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg bg-secondary text fixed-top navbar-shrink" id="mainNav">
-		<div class="container">
-			<a class="navbar-brand" href="#page-top">Majoo Teknologi Indonesia</a>
+		<div class="row col-12">
+			<div class="col d-flex justify-content-start ms-3">
+				<a class="navbar-brand" href="#page-top">Majoo Teknologi Indonesia</a>
+			</div>
+			<div class="col d-flex justify-content-end my-2">
+				<button class="btn btn-primary" onclick="location.href='<?php echo base_url();?>admin'">Login as Admin</button>
+			</div>
 		</div>
 	</nav>
 	<!-- Portfolio Section-->
@@ -32,7 +37,7 @@
 			<H2 class="mb-4">Product</H2>
 			<!-- Portfolio Grid Items-->
 			<div class="row justify-content">
-				<?php foreach ($products->result_array() as $product): ?>
+				<?php foreach ($products as $product): ?>
 				<!-- Daftar product -->
 				<div class="col-md-6 col-lg-3 mb-5">
 					<form action="beli" method="post">
@@ -42,15 +47,15 @@
 									<div class="image">
 										<!-- Portfolio Modal - Image-->
 										<img class="img-fluid rounded mb-5"
-											src=<?php echo 'assets/img/produk/'.$product['FOTO_PRODUK'] ?> alt="..." />
+											src=<?php echo 'assets/img/produk/'.$product->FOTO_PRODUK ?> alt="..." />
 									</div>
 									<!-- Portfolio Modal - Text-->
 									<input hidden id="idProduk" name="idProduk"
-										value=<?php echo $product['ID_PRODUK'] ?>>
-									<p><?php echo $product['NAMA_PRODUK'] ?></p>
+										value=<?php echo $product->ID_PRODUK ?>>
+									<p><?php echo $product->NAMA_PRODUK ?></p>
 									<p>Rp. <?php
-									echo number_format($product['HARGA_PRODUK'],2,',','.')?></p>
-									<p><?php echo substr(nl2br($product['DESKRIPSI_PRODUK']), 0, 50) ?>...</p>
+									echo number_format($product->HARGA_PRODUK,2,',','.')?></p>
+									<p><?php echo substr(nl2br($product->DESKRIPSI_PRODUK), 0, 50) ?>...</p>
 								</div>
 								<div class="col-lg-12 text-center">
 									<button type="submit" class="btn btn-primary" name="submit">
@@ -62,12 +67,13 @@
 					</form>
 				</div>
 				<?php endforeach ?>
+				<p class="col-2 text-center d-flex justify-content-between"><?php echo $links; ?></p>
 			</div>
 		</div>
 	</section>
 	<!-- Copyright Section-->
 	<div class="copyright py-4 text-center text-white">
-		<div class="container"><small>2019 &copy; PT Majoo Teknologi Indonesia</small></div>
+		<div class="container"><small>2022 &copy; PT Majoo Teknologi Indonesia</small></div>
 	</div>
 	<!-- Bootstrap core JS-->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

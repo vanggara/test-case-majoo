@@ -166,7 +166,7 @@
 	</section>
 	<!-- Copyright Section-->
 	<div class="copyright py-4 text-center text-white">
-		<div class="container"><small>2019 &copy; PT Majoo Teknologi Indonesia</small></div>
+		<div class="container"><small>2022 &copy; PT Majoo Teknologi Indonesia</small></div>
 	</div>
 	<!-- Bootstrap core JS-->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

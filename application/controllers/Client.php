@@ -7,12 +7,24 @@ class Client extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+        $this->load->helper('url');
 		$this->load->model('ProductModel');
+        $this->load->library("pagination");
 	}
 
 	public function index()
 	{
-        $data['products'] = $this->ProductModel->listProduk();
+        $config = array();
+        $config["base_url"] = base_url() . "";
+        $config["total_rows"] = $this->ProductModel->get_count();
+        $config["per_page"] = 4;
+        $config["uri_segment"] = 0;
+
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segments) ? $this->uri->segments[1] : 0;
+        $data["links"] = $this->pagination->create_links();
+        $data['products'] = $this->ProductModel->get_authors($config["per_page"], $page);
 		$this->load->view('product', $data);
 	}
 

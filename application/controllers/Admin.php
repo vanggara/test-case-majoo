@@ -10,6 +10,8 @@ class Admin extends CI_Controller {
 		$this->load->model('AdminModel');
         $this->load->model('Auth_model');
 		$this->load->library('form_validation');
+        $this->load->helper('url');
+        $this->load->library("pagination");
         $rules = $this->Auth_model->rules();
 		$this->form_validation->set_rules($rules);
 	}
@@ -17,10 +19,23 @@ class Admin extends CI_Controller {
     public function index()
 	{
 		if($this->Auth_model->current_user()==1){
-            $data['products'] = $this->AdminModel->listProduk();
+            $config = array();
+            $config["base_url"] = base_url() . "/admin";
+            $config["total_rows"] = $this->AdminModel->get_count();
+            $config["per_page"] = 4;
+            $config["uri_segment"] = 0;
+    
+            $this->pagination->initialize($config);
+
+            $page = (count($this->uri->segments) > 1) ? $this->uri->segments[2] : 0;
+            $data["links"] = $this->pagination->create_links();
+            $data['products'] = $this->AdminModel->get_authors($config["per_page"], $page);
             $this->load->view('Admin/product', $data);
+
+            // $data['products'] = $this->AdminModel->listProduk();
+            // $this->load->view('Admin/product', $data);
 		} else {
-            echo "<script>alert('Silahkan login dahulu!');</script>";
+            // echo "<script>alert('Silahkan login dahulu!');</script>";
             redirect(base_url('admin/login'),'refresh'); 
 		}
 	}
@@ -28,10 +43,9 @@ class Admin extends CI_Controller {
     public function login()
 	{
         if($this->Auth_model->current_user()==1){
-            $data['products'] = $this->AdminModel->listProduk();
-            $this->load->view('Admin/product', $data);
+            redirect(base_url('admin'),'refresh'); 
 		} else {
-            echo "<script>alert('Silahkan login dahulu!');</script>";
+            // echo "<script>alert('Silahkan login dahulu!');</script>";
             $this->load->view('Admin/login');
 		}
 	}
@@ -120,6 +134,7 @@ class Admin extends CI_Controller {
         $namaProduk = $_POST['namaProduk'];
         $hargaProduk = $_POST['hargaProduk'];
         $deskripsiProduk = $_POST['deskripsiProduk'];
+        $selKategori = $_POST['selKategori'];
         $target_dir = "../assets/img/produk/";
         $file_type =$_FILES['fotoProduk']['type'];
         $filePath = $target_dir . basename($_FILES["fotoProduk"]["name"]);
@@ -138,7 +153,8 @@ class Admin extends CI_Controller {
                 'NAMA_PRODUK' => $namaProduk,
                 'HARGA_PRODUK' => $hargaProduk,
                 'DESKRIPSI_PRODUK' => $deskripsiProduk,
-                'FOTO_PRODUK' => $fotoProduk
+                'FOTO_PRODUK' => $fotoProduk,
+                'KATEGORI_PRODUK' => $selKategori
             );
 
             if ($file_type=="image/jpeg" || $file_type=="image/jpg" || $file_type=="image/png") {
@@ -199,4 +215,14 @@ class Admin extends CI_Controller {
             redirect(base_url('admin/login'),'refresh'); 
 		}
 	}
+    
+   function getKategori()
+   {
+       // Search term
+        $searchTerm = $this->input->post('searchTerm');
+
+        // Get users
+        $response = $this->AdminModel->getKategori($searchTerm);
+        echo json_encode($response);
+    }
 }

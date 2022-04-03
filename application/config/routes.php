@@ -52,10 +52,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //produk
 $route['default_controller'] = "Client";
 $route['produk'] = 'Client';
+$route['(:num)'] = 'Client';
 $route['beli'] = 'Client/beliProduk';
 $route['transfer'] = 'Client/transfer';
 //admin
 $route['admin'] = "Admin";
+$route['admin/(:num)'] = "Admin";
 $route['admin/login'] = "Admin/login";
 $route['admin/pesanan'] = "Admin/pesanan";
 $route['admin/proses-pesanan'] = "Admin/prosesPesanan";
@@ -67,6 +69,7 @@ $route['admin/save-produk'] = "Admin/insertProduk";
 $route['admin/edit-produk/(:any)'] = "Admin/editProduk/$1";
 $route['admin/update-produk'] = "Admin/updateProduk";
 $route['admin/hapus-produk/(:any)'] = "Admin/hapusProduk/$1";
+$route['admin/getKategori'] = "Admin/getKategori";
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

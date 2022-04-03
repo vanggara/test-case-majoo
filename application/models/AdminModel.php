@@ -23,7 +23,7 @@ class AdminModel extends CI_Model {
     }
 
     public function editProduk($idProduk){
-        $data = $this->db->query('SELECT * FROM PRODUK WHERE ID_PRODUK = '.$idProduk.';');
+        $data = $this->db->query('SELECT * FROM PRODUK p JOIN KATEGORI k ON p.KATEGORI_PRODUK = k.ID_KATEGORI WHERE ID_PRODUK = '.$idProduk.';');
         return $data;
     }
 
@@ -55,6 +55,33 @@ class AdminModel extends CI_Model {
         $this->db->where('ID_PEMBELI', $id);
         $this->db->update('PEMBELI');
 		return true;
+    }
+    
+    public function get_count() {
+        return $this->db->count_all('PRODUK');
+    }
+    
+    public function get_authors($limit, $start) {
+        $this->db->limit($limit, $start);
+        $query = $this->db->get('PRODUK');
+
+        return $query->result();
+    }
+    
+    function getKategori($searchTerm)
+    {
+        // Fetch users
+        $this->db->select('*');
+        $this->db->where("NAMA_KATEGORI like '%".$searchTerm."%' ");
+        $fetched_records = $this->db->get('kategori');
+        $users = $fetched_records->result_array();
+
+        // Initialize Array with fetched data
+        $data = array();
+        foreach($users as $user){
+        $data[] = array("id"=>$user['ID_KATEGORI'], "text"=>$user['NAMA_KATEGORI']);
+        }
+        return $data;
     }
 }
 ?>

@@ -7,12 +7,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>Admin Logipedia Users</title>
+	<title>Majoo Teknologi Indonesia</title>
 	<link href=<?php echo base_url('assets/admin/css/styles.css')?> rel="stylesheet" />
 	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
 		crossorigin="anonymous" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous">
 	</script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+	<!-- CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+  
+
 </head>
 
 <body class="sb-nav-fixed">
@@ -71,12 +80,25 @@
 												type="text" value="" placeholder=""  required/>
 										</div>
 									</div>
-									</div><div class="form-row">
+									</div>
+									<div class="form-row">
 									<div class="col-md-12">
 										<div class="form-group">
 											<label class="small mb-1" for="hargaProduk">Harga Produk </label>
 											<input class="form-control py-4" name="hargaProduk" id="hargaProduk"
 												type="number" value="" placeholder="" required/>
+										</div>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="small mb-1" for="selKategori">Kategori Produk </label>
+											<div class="py-2">
+												<select id='selKategori' class="w-100">
+													<option value='0'>-- Pilih Kategori --</option>
+												</select>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -107,7 +129,7 @@
 			<footer class="py-4 bg-light mt-auto">
 				<div class="container-fluid">
 					<div class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">2019 &copy; PT Majoo Teknologi Indonesia
+						<div class="text-muted">2022 &copy; PT Majoo Teknologi Indonesia
 						</div>
 						<div>
 							<a href="#">Privacy Policy</a>
@@ -119,13 +141,36 @@
 			</footer>
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script> -->
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous">
 	</script>
 	<script src=<?php echo base_url('assets/admin/js/scripts.js')?>></script>
 	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 	<script src=<?php echo base_url('assets/admin/demo/datatables-demo.js')?>></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#selKategori").select2({
+				ajax: {
+					url: 'getKategori',
+					dataType: 'json',
+					type: "post",
+					delay: 250,
+					data: function (params) {
+						return {
+							searchTerm: params.term // search term
+						};
+					},
+					processResults: function (response) {
+						return {
+							results: response
+						};
+					},
+					cache: true
+				}
+			});
+		});
+	</script>
 </body>
 
 </html>

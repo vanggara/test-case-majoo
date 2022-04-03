@@ -17,5 +17,16 @@ class ProductModel extends CI_Model {
 		$this->db->insert('PEMBELI', $data);
 		return true;
     }
+
+    public function get_count() {
+        return $this->db->count_all('PRODUK');
+    }
+    
+    public function get_authors($limit, $start) {
+        $this->db->limit($limit, $start);
+        $query = $this->db->get('PRODUK');
+
+        return $query->result();
+    }
 }
 ?>

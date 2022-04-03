@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>Admin Logipedia Users</title>
+	<title>Majoo Teknologi Indonesia</title>
 	<link href=<?php echo base_url('assets/admin/css/styles.css')?> rel="stylesheet" />
 	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
 		crossorigin="anonymous" />
@@ -81,17 +81,17 @@
 									</thead>
 									<tbody>
 										<?php $no = 1; ?>
-										<?php foreach ($products->result_array() as $product): ?>
+										<?php foreach ($products as $product): ?>
 										<tr>
-											<th><?php echo $no++ ?></th>
-											<td><?php echo $product['NAMA_PRODUK'] ?></td>
-											<td>Rp. <?php echo number_format($product['HARGA_PRODUK'],2,',','.') ?>
+											<th><?php echo $product->ID_PRODUK ?></th>
+											<td><?php echo $product->NAMA_PRODUK ?></td>
+											<td>Rp. <?php echo number_format($product->HARGA_PRODUK,2,',','.') ?>
 											</td>
-											<td><?php echo $product['DESKRIPSI_PRODUK'] ?></td>
+											<td><?php echo $product->DESKRIPSI_PRODUK ?></td>
 											<td><a
-													href=<?php echo base_url('admin/edit-produk/')?><?php echo $product['ID_PRODUK'] ?>>Edit</a>
+													href=<?php echo base_url('admin/edit-produk/')?><?php echo $product->ID_PRODUK ?>>Edit</a>
 												/
-												<a href=<?php echo base_url('admin/hapus-produk/')?><?php echo $product['ID_PRODUK'] ?>
+												<a href=<?php echo base_url('admin/hapus-produk/')?><?php echo $product->ID_PRODUK ?>
 													onclick="return confirm_alert(this);">Hapus</a>
 
 											</td>
@@ -99,6 +99,7 @@
 										<?php endforeach?>
 									</tbody>
 								</table>
+								<p class="col-2 text-center d-flex justify-content-between"><?php echo $links; ?></p>
 							</div>
 						</div>
 					</div>
@@ -108,7 +109,7 @@
 			<footer class="py-4 bg-light mt-auto">
 				<div class="container-fluid">
 					<div class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">2019 &copy; PT Majoo Teknologi Indonesia
+						<div class="text-muted">2022 &copy; PT Majoo Teknologi Indonesia
 						</div>
 						<div>
 							<a href="#">Privacy Policy</a>

@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>Admin Logipedia Users</title>
+	<title>Majoo Teknologi Indonesia</title>
 	<link href=<?php echo base_url('assets/admin/css/styles.css')?> rel="stylesheet" />
 	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
 		crossorigin="anonymous" />
@@ -101,7 +101,7 @@
 			<footer class="py-4 bg-light mt-auto">
 				<div class="container-fluid">
 					<div class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">2019 &copy; PT Majoo Teknologi Indonesia
+						<div class="text-muted">2022 &copy; PT Majoo Teknologi Indonesia
 						</div>
 						<div>
 							<a href="#">Privacy Policy</a>
